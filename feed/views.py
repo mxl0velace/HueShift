@@ -16,6 +16,6 @@ def index(request):
             v = Vote.objects.get_or_create(author=request.user,post=Post(id=postid))[0]
             v.hue = hue
             v.save()
-            return HttpResponse(status=201)
+            return HttpResponse(Post(id=postid).hue)
         else:
             return HttpResponse(status=401)

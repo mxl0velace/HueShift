@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
+from math import cos, sin, atan2, pi, degrees, radians
 
 # Create your models here.
 
@@ -18,12 +19,20 @@ class Post(models.Model):
 
     @property
     def hue(self):
-        hue = 0
+        x = 0
+        y = 0
         count = 0
         for vote in self.vote_set.all():
-            hue += vote.hue # Not correct behaviour yet
+            x += cos(radians(vote.hue)) # Not correct behaviour yet
+            y += sin(radians(vote.hue))
             count += 1
-        hue /= count
+        x /= count
+        y /= count
+
+        hue = atan2(y, x)
+        if hue < -1:
+            hue += 2 * pi
+        hue = degrees(hue)
         return hue
 
     def __str__(self):

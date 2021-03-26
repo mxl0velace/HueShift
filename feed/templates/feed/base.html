@@ -12,6 +12,7 @@
     <div class="hbox">
     {% if user.is_authenticated %}
         {{ user.username }}, <a href = "{% url 'logout' %}">Log out</a>
+        <a href = "{% url 'makepiece' %}">Make a Piece</a>
     {% else %}
         <a href = "{% url 'login' %}">Log in</a>
         <a href = "{% url 'signup' %}">Sign up</a>

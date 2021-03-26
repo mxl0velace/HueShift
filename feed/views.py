@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Vote
 from django.http import HttpResponse
+from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -19,3 +21,17 @@ def index(request):
             return HttpResponse(Post(id=postid).hue)
         else:
             return HttpResponse(status=401)
+
+@login_required
+def makepiece(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            p = form.save(commit=False)
+            p.author = request.user
+            p.save()
+            return redirect('/')
+        else:
+            print("Invalid post?")
+    return render(request, 'feed/post.html', {'form':form})

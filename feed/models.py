@@ -19,6 +19,8 @@ class Post(models.Model):
 
     @property
     def hue(self):
+        if self.vote_set.count() == 0:
+            return 0
         x = 0
         y = 0
         count = 0

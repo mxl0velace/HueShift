@@ -1,0 +1,10 @@
+{% extends "feed/base.html" %}
+
+{% block content %}
+<h2>Make a Piece</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Post it!</button>
+  </form>
+{% endblock %}

@@ -1,18 +1,19 @@
 {% extends "feed/base.html" %}
 
-{% block content%}
-{% if user.is_authenticated %}
-{{ user.username }}, <a href = "{% url 'logout' %}">Log out</a>
-{% else %}
-<a href = "{% url 'login' %}">Log in</a>
-{% endif %}
+{% block content %}
 {% if post_list %}
+    <form id="hiddenForm" method="post" onsubmit = "return false">
+        {% csrf_token %}
+        <input type="hidden" name="pid" value="{{ post.post_id }}"/>
+        <input type="hidden" name="hue" value="-1"/>
+    </form>
     {% for post in post_list %}
-    <div class="post">
+    <div class="post" data-postid="{{ post.post_id }}" style="background-color: hsl({{ post.hue }},50%,50%)">
         {{ post.body_text }}
         {{ post.author.username }}
         {{ post.date_posted }}
         {{ post.post_id }}
+        <button onClick="paintClick(this)">Paint</button>
     </div>
     {% endfor %}
 {% endif %}

@@ -1,0 +1,31 @@
+.post{
+    padding: 20px;
+    width:100%;
+}
+
+#middle{
+    margin: auto;
+    margin-top: 120px;
+    width: 50%;
+}
+
+#picker{
+    display:none;
+}
+
+#hiddenForm{
+    display:none;
+}
+
+#header{
+    top:0;
+    width:100%;
+    background-color: bisque;
+    position:fixed;
+    margin:0;
+    height: 120px;
+}
+
+body{
+    margin:0;
+}

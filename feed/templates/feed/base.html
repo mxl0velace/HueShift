@@ -1,10 +1,26 @@
+{% load static %}
 <html>
     <head>
     <title>HueShift</title>
+    <link rel="stylesheet" href="{% static 'feed/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <script src={% static 'feed/colourpick.js' %}></script>
     </head>
     <body>
+    <div id="header">
     <h1> HueShift </h1>
+    <div class="hbox">
+    {% if user.is_authenticated %}
+        {{ user.username }}, <a href = "{% url 'logout' %}">Log out</a>
+    {% else %}
+        <a href = "{% url 'login' %}">Log in</a>
+    {% endif %}
+    </div>
+    </div>
+    <div id="middle">
     {% block content %}
     {% endblock %}
+    </div>
+    <div id="picker"></div>
     </body>
 </html>

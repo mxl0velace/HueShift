@@ -19,8 +19,11 @@ class Post(models.Model):
     @property
     def hue(self):
         hue = 0
+        count = 0
         for vote in self.vote_set.all():
             hue += vote.hue # Not correct behaviour yet
+            count += 1
+        hue /= count
         return hue
 
     def __str__(self):
@@ -32,7 +35,8 @@ class Vote(models.Model):
         on_delete=models.CASCADE
     )
     hue = models.IntegerField(
-        validators=[MinValueValidator(1),MaxValueValidator(360)]
+        validators=[MinValueValidator(1),MaxValueValidator(360)],
+        default=1
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,

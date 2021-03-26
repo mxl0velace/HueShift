@@ -1,11 +1,14 @@
 .post{
     padding: 20px;
     width:100%;
+    margin:20px;
+    border-radius: 20px;
+    display: inline-block;
 }
 
 #middle{
     margin: auto;
-    margin-top: 120px;
+    margin-top: 140px;
     width: 50%;
 }
 
@@ -28,4 +31,25 @@
 
 body{
     margin:0;
+}
+
+.post_text{
+    font-size: 120%;
+    text-align: start;
+    width: 75%;
+    float:right;
+}
+
+.post_author{
+    float: left;
+    width: 10%;
+}
+
+.post_date{
+    float: right;
+    width: 15%;
+}
+
+.paint{
+    width:100%;
 }

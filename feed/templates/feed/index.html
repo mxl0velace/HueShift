@@ -8,12 +8,11 @@
         <input type="hidden" name="hue" value="-1"/>
     </form>
     {% for post in post_list %}
-    <div class="post" data-postid="{{ post.post_id }}" style="background-color: hsl({{ post.hue }},50%,50%)">
-        {{ post.body_text }}
-        {{ post.author.username }}
-        {{ post.date_posted }}
-        {{ post.post_id }}
-        <button onClick="paintClick(this)">Paint</button>
+    <div class="post" data-postid="{{ post.post_id }}" style="background-color: hsl({{ post.hue }},100%,50%)">
+        <div class="post_author">{{ post.author.username }}</div>
+        <div class="post_date">{{ post.date_posted|date:"j/n/y H:i"}}</div>
+        <div class="post_text">{{ post.body_text }}</div>
+        <button class="paint" onClick="paintClick(this)">Paint</button>
     </div>
     {% endfor %}
 {% endif %}

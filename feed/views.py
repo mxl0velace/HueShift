@@ -13,11 +13,9 @@ def index(request):
         if request.user.is_authenticated:
             postid = int(request.POST['pid'])
             hue = int(request.POST['hue'])
-            existing = Vote.objects.filter(id=postid,author=request.user)
-            if len(existing) == 0:
-                p = Post(id=postid)
-                Vote(author=request.user,post=p,hue=hue).save()
-            else:
-                existing[0].hue = hue
-                existing[0].save()
+            v = Vote.objects.get_or_create(author=request.user,post=Post(id=postid))[0]
+            v.hue = hue
+            v.save()
             return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=401)

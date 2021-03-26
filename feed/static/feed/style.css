@@ -27,6 +27,18 @@
     position:fixed;
     margin:0;
     height: 120px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#sidebar{
+    left:0;
+    height:100%;
+    position:fixed;
+    margin:0;
+    background-color: burlywood;
+    width:15%;
+    box-sizing: border-box;
 }
 
 body{

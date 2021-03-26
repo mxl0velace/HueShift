@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Vote
 from django.http import HttpResponse
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -35,3 +36,8 @@ def makepiece(request):
         else:
             print("Invalid post?")
     return render(request, 'feed/post.html', {'form':form})
+
+def artist(request, username):
+    user = get_object_or_404(get_user_model(), username=username)
+    posts = Post.objects.filter(author=user).order_by('-id')
+    return render(request, 'feed/artist.html', {'post_list':posts, 'artist':user })

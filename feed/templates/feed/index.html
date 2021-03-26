@@ -1,6 +1,11 @@
 {% extends "feed/base.html" %}
 
 {% block content%}
+{% if user.is_authenticated %}
+{{ user.username }}, <a href = "{% url 'logout' %}">Log out</a>
+{% else %}
+<a href = "{% url 'login' %}">Log in</a>
+{% endif %}
 {% if post_list %}
     {% for post in post_list %}
     <div class="post">

@@ -1,0 +1,14 @@
+{% extends "feed/base.html" %}
+
+{% block content%}
+{% if post_list %}
+    {% for post in post_list %}
+    <div class="post">
+        {{ post.body_text }}
+        {{ post.author.username }}
+        {{ post.date_posted }}
+        {{ post.post_id }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

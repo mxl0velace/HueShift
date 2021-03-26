@@ -10,6 +10,11 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
+    date_posted = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def post_id(self):
+        return self.id
 
 class Vote(models.Model):
     post = models.ForeignKey(

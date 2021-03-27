@@ -33,8 +33,10 @@
     background-color: #bbbfca;
     position:fixed;
     margin:0;
-    height: 120px;
+    min-height: 80px;
     padding: 5px;
+    z-index: 50;
+    display: table;
 }
 
 #sidebar{
@@ -108,4 +110,28 @@ body{
 
 *{
     box-sizing: border-box;
+}
+
+.title{
+    width:100%;
+    min-height: 50px;
+    text-align: center;
+}
+
+.navbar > li{
+    float: left;
+    display: block;
+    background-color: #e8e8e8;
+    padding: 14px;
+    font-size: 17px;
+}
+
+.navbar > li > a, .navbar > li > a:visited, .navbar > li > a:hover, .navbar > li > a:active{
+    text-decoration: none;
+    color:inherit;
+}
+
+.navbar > li:hover{
+    background-color: #495464;
+    color: #e8e8e8;
 }

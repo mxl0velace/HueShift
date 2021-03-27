@@ -119,7 +119,7 @@ body{
 }
 
 .navbar{
-    width: 33%;
+    width: 100%;
     display: grid;
     grid-auto-flow: column;
 }
@@ -151,6 +151,10 @@ body{
 .navbar > .navitem:hover{
     background-color: #495464;
     color: #e8e8e8;
+}
+
+.signUp{
+    grid-area: span 1 / span 2;
 }
 
 h2{

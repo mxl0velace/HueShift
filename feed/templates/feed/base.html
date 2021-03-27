@@ -7,11 +7,15 @@
     <script src={% static 'feed/colourpick.js' %}></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quattrocento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     </head>
     <body>
     <div id="header">
-    <h1 class="title"><a href='{% url 'index' %}'>HueShift</a></h1>
+    <div class='pageid'>{% block pageid %}{% endblock pageid %}</div>
+    <div class='logoholder'>
+        <a href='{% url 'index' %}'><img class='logoimage' src = '{% static 'feed/hueshift.png' %}' alt='HueShift'></a>
+    </div>
     <div class="navbar">
     {% if user.is_authenticated %}
         <a class="navitem" href='{% url 'artist' user.username %}'>{{ user.username }}</a>

@@ -1,0 +1,10 @@
+<svg width="700" height="200" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <text font-style="normal" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Montserrat'" font-size="79" id="svg_1" y="127.64286" x="163.14285" opacity="undefined" stroke-width="0" stroke="#000" fill="#000000">HueShift</text>
+  <text font-style="normal" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Montserrat'" font-size="79" id="svg_2" y="124.48939" x="334.14286" opacity="undefined" stroke-width="0" stroke="#000" fill="#ff0000">Shift</text>
+  <text font-style="normal" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Montserrat'" font-size="79" id="svg_3" y="129.18784" x="331.85714" opacity="undefined" stroke-width="0" stroke="#000" fill="#00ff00">Shift</text>
+  <text font-style="normal" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Montserrat'" font-size="79" id="svg_4" y="131.57935" x="334.71429" opacity="undefined" stroke-width="0" stroke="#000" fill="#0000ff">Shift</text>
+ </g>
+</svg>

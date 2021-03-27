@@ -15,13 +15,23 @@ def index(request):
     elif request.method == 'POST':
         if request.user.is_authenticated:
             postid = int(request.POST['pid'])
-            hue = int(request.POST['hue'])
-            v = Vote.objects.get_or_create(author=request.user,post=Post(id=postid))[0]
-            v.hue = hue
-            v.save()
-            return HttpResponse(Post(id=postid).hue)
+            if request.POST['action'] == 'shift':
+                hue = int(request.POST['hue'])
+                v = Vote.objects.get_or_create(author=request.user,post=Post(id=postid))[0]
+                v.hue = hue
+                v.save()
+                return HttpResponse(Post(id=postid).hue) # Updated colour
+            elif request.POST['action'] == 'delete':
+                p = Post.objects.get(id=postid)
+                if p.author == request.user:
+                    p.delete()
+                    return HttpResponse(status=204) # Accepted
+                else:
+                    return HttpResponse(status=401) # Unauthorised
+            else:
+                return HttpResponse(status=400) # Bad Request
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=401) # Unauthorised
 
 @login_required
 def makepiece(request):

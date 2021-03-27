@@ -17,7 +17,7 @@ class Post(models.Model):
         default=1
     )
     has_image = models.BooleanField(default=False)
-    image_url = models.CharField(null=True, blank=True,max_length=50,validators=[RegexValidator('https:\/\/i.imgur.com\/\w*.(png|jpg|gif)')])
+    image_url = models.CharField(null=True, blank=True,max_length=50,validators=[RegexValidator('https:\/\/i.imgur.com\/\w*.(png|jpg|gif|jpeg)')])
 
     @property
     def post_id(self):

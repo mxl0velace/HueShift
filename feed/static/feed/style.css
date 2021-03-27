@@ -173,7 +173,7 @@ input, button, textarea{
     margin-bottom: 5px;
     display:block;
 }
-input[type=text], textarea{
+input[type=text],input[type=password],input[type=email], textarea{
     width:95%;
     clear:both;
     padding: 12px;

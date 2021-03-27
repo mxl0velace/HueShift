@@ -8,11 +8,17 @@
         <input type="hidden" name="hue" value="-1"/>
     </form>
     {% for post in post_list %}
-    <div class="post" data-postid="{{ post.post_id }}" style="background-color: hsl({{ post.hue }},100%,50%)">
-        <div class="post_author"><a href = '{% url 'artist' post.author.username %}' >{{ post.author.username }}</a></div>
-        <div class="post_date">{{ post.date_posted|date:"j/n/y H:i"}}</div>
-        <div class="post_text">{{ post.body_text }}</div>
-        <button class="paint" onClick="paintClick(this)">Paint</button>
+    <div class="post" data-postid="{{ post.post_id }}">
+        <div class="post_header">
+            <div class="post_author"><a href = '{% url 'artist' post.author.username %}' >{{ post.author.username }}</a></div>
+            <div class="post_date">{{ post.date_posted|date:"j/n/y H:i"}}</div>
+            <div class="post_buttons">
+                <span class="material-icons material-icons-outlined" onClick="paintClick(this)">palette</span>
+            </div>
+        </div>
+        <div class="post_body" style="background-color: hsl({{ post.hue }},100%,50%)">
+            <div class="post_text">{{ post.body_text }}</div>
+        </div>
     </div>
     {% endfor %}
 {% endif %}

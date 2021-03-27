@@ -8,9 +8,7 @@ var colourPicker = new iro.ColorPicker('#picker', {
 });
 
 function sendColour(){
-    target = document.getElementById("picker").parentNode;
-    console.log(document.getElementById("picker").parentNode.dataset.postid);
-    console.log(colourPicker.color.hsl.h);
+    target = document.getElementById("picker").parentNode.querySelector('.post_body');
     var form = document.getElementById("hiddenForm");
     form.pid.value = document.getElementById("picker").parentNode.dataset.postid;
     form.hue.value = colourPicker.color.hsl.h;
@@ -27,7 +25,7 @@ colourPicker.on("input:end", sendColour);
 
 function paintClick(button){
     var colourParent = document.getElementById("picker");
-    button.parentElement.appendChild(colourParent);
+    button.closest('.post').appendChild(colourParent);
     colourPicker.reset();
     colourParent.style.display = "block";
 }

@@ -118,20 +118,61 @@ body{
     text-align: center;
 }
 
-.navbar > li{
+.navbar{
+    width: 33%;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+#dropdown-content{
+    display: none;
+    width: 100%;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-column-end: 5;
+    height: 220px;
+}
+
+.navbar > .navitem{
     float: left;
     display: block;
     background-color: #e8e8e8;
     padding: 14px;
     font-size: 17px;
+    height:48px;
 }
 
-.navbar > li > a, .navbar > li > a:visited, .navbar > li > a:hover, .navbar > li > a:active{
+.navbar > .navitem, .navbar > .navitem:visited, .navbar > .navitem:hover, .navbar > .navitem:active{
     text-decoration: none;
     color:inherit;
+    cursor: pointer;
 }
 
-.navbar > li:hover{
+.navbar > .navitem:hover{
     background-color: #495464;
     color: #e8e8e8;
+}
+
+h2{
+    margin: 10px;
+    width: 100%;
+    text-align:center;
+}
+
+
+input, button, textarea{
+    font-family: inherit;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:block;
+}
+input[type=text], textarea{
+    width:95%;
+    clear:both;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #495464;
 }

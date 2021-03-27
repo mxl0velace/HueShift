@@ -238,3 +238,11 @@ label{
 .footer-right{
     order: 2;
 }
+
+#id_image_url, label[for="id_image_url"]{
+    display: none;
+}
+
+#id_has_image:checked ~ #id_image_url,#id_has_image:checked ~ label[for="id_image_url"]{
+    display: block;
+}

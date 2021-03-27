@@ -5,7 +5,7 @@ class PostForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ['body_text']
+        fields = ['body_text','has_image','image_url']
         labels = {
             'body_text' : ''
         }
@@ -16,5 +16,8 @@ class PostForm(forms.ModelForm):
                 'maxlength' : Post._meta.get_field('body_text').max_length,
                 'style':'resize:none;',
                 'placeholder':'Piece text...'
+            }),
+            'image_url' : forms.TextInput(attrs={
+                'placeholder':'https://i.imgur.com/[YOURCODE].[EXT]'
             })
         }

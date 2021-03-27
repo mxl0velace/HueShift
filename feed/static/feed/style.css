@@ -181,6 +181,15 @@ input[type=text],input[type=password],input[type=email], textarea{
     border: 2px solid #495464;
 }
 
+input[type=checkbox]{
+    width:25px;
+    height:25px;
+}
+
+label{
+    margin: 5px;
+}
+
 .logoimage{
     height:100px;
     position: absolute;
@@ -199,4 +208,9 @@ input[type=text],input[type=password],input[type=email], textarea{
     padding: 5px;
     text-align: center;
     height: 100%;
+}
+
+.post_image{
+    width:100%;
+    padding: 20px;
 }

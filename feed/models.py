@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from math import cos, sin, atan2, pi, degrees, radians
 
 # Create your models here.
@@ -16,6 +16,8 @@ class Post(models.Model):
         validators=[MinValueValidator(1),MaxValueValidator(360)],
         default=1
     )
+    has_image = models.BooleanField(default=False)
+    image_url = models.CharField(null=True, blank=True,max_length=50,validators=[RegexValidator('https:\/\/i.imgur.com\/\w*.(png|jpg|gif)')])
 
     @property
     def post_id(self):

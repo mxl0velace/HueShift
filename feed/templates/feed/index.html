@@ -21,6 +21,9 @@
             </div>
         </div>
         <div class="post_body" style="background-color: hsl({{ post.hue }},100%,50%)">
+            {% if post.has_image %}
+                <img class="post_image" src='{{ post.image_url }}'/>
+            {% endif %}
             <div class="post_text">{{ post.body_text }}</div>
             <div class="post_shift"></div>
         </div>

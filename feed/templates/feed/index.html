@@ -34,3 +34,15 @@
 {% endblock %}
 
 {% block pageid %}{% endblock %}
+
+{% block footerleft %}
+<a class="post footer footer-left" href='{{ request.path }}?page={{ pagenum|add:"-1" }}'>
+    Previous Page
+</a>
+{% endblock footerleft %}
+
+{% block footerright %}
+<a class="post footer footer-right" href='{{ request.path }}?page={{ pagenum|add:"1" }}'>
+    Next Page
+</a>
+{% endblock footerright %}

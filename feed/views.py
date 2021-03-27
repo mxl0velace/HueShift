@@ -9,11 +9,13 @@ from django.db.models import Q
 # Create your views here.
 
 SEARCH_RANGE = 60
+PER_PAGE = 20
 
 def index(request):
     if request.method == 'GET':
-        posts = Post.objects.order_by('-id')
-        context = {'post_list' : posts}
+        pagenum = handlePagenum(request)
+        posts = Post.objects.order_by('-id')[(pagenum-1)*PER_PAGE:pagenum*PER_PAGE]
+        context = {'post_list' : posts, 'pagenum':pagenum}
         return render(request, 'feed/index.html', context)
     elif request.method == 'POST':
         if request.user.is_authenticated:
@@ -58,11 +60,13 @@ def makepiece(request):
 
 def artist(request, username):
     user = get_object_or_404(get_user_model(), username=username)
-    posts = Post.objects.filter(author=user).order_by('-id')
-    return render(request, 'feed/artist.html', {'post_list':posts, 'artist':user })
+    pagenum = handlePagenum(request)
+    posts = Post.objects.filter(author=user).order_by('-id')[(pagenum-1)*PER_PAGE:pagenum*PER_PAGE]
+    return render(request, 'feed/artist.html', {'post_list':posts, 'artist':user, 'pagenum':pagenum})
 
 def search(request):
     hue = int(request.GET.get("h",0))
+    pagenum = handlePagenum(request)
     lowerbound = hue - (SEARCH_RANGE / 2)
     upperbound = hue + (SEARCH_RANGE / 2)
     posts = Post.objects.none()
@@ -74,4 +78,15 @@ def search(request):
         posts = posts | Post.objects.filter(hue__range=(hue,360)) | Post.objects.filter(hue__lte=upperbound-360)
     else:
         posts = posts | Post.objects.filter(hue__range=(hue,upperbound))
-    return render(request,'feed/search.html', {'post_list':posts, 'search_hue':hue})
+    return render(request,'feed/search.html', {'post_list':posts[(pagenum-1)*PER_PAGE:pagenum*PER_PAGE], 'search_hue':hue, 'pagenum':pagenum})
+
+def handlePagenum(request):
+    pageN = request.GET.get('page',1)
+    pagenum = 1
+    try:
+        pagenum = int(pageN)
+        if pagenum < 1:
+            pagenum = 1
+    except ValueError:
+        pagenum = 1
+    return pagenum

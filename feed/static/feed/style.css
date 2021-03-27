@@ -211,3 +211,30 @@ label{
     width:100%;
     padding: 20px;
 }
+
+#footer-container{
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer {
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    display: block;
+}
+
+.footer-left{
+    order: -2;
+}
+
+.footer-mid{
+    order: 0;
+}
+
+.footer-right{
+    order: 2;
+}

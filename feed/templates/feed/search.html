@@ -3,3 +3,15 @@
 {% block pageid %}
 <h2 style='color:hsl({{ search_hue }},100%,50%);'>Search Results</h2>
 {% endblock %}
+
+{% block footerleft %}
+<a class="post footer footer-left" href='{{ request.path }}?page={{ pagenum|add:"-1" }}&h={{ search_hue }}'>
+    Previous Page
+</a>
+{% endblock footerleft %}
+
+{% block footerright %}
+<a class="post footer footer-right" href='{{ request.path }}?page={{ pagenum|add:"1" }}&h={{ search_hue }}'>
+    Next Page
+</a>
+{% endblock footerright %}

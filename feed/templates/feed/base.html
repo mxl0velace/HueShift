@@ -12,16 +12,19 @@
     <body>
     <div id="header">
     <h1 class="title"><a href='{% url 'index' %}'>HueShift</a></h1>
-    <ul class="navbar">
+    <div class="navbar">
     {% if user.is_authenticated %}
-        <li><a href='{% url 'artist' user.username %}'>{{ user.username }}</a></li>
-        <li><a href = "{% url 'logout' %}" class='buttonLink'>Log out</a></li>
-        <li><a href = "{% url 'makepiece' %}" class='buttonLink'>Make a Piece</a></li>
+        <a class="navitem" href='{% url 'artist' user.username %}'>{{ user.username }}</a>
+        <a class="navitem" href = "{% url 'logout' %}" class='buttonLink'>Log out</a>
+        <a class="navitem" href = "{% url 'makepiece' %}" class='buttonLink'>Make a Piece</a>
     {% else %}
-        <li><a href = "{% url 'login' %}" class='buttonLink'>Log in</a></li>
-        <li><a href = "{% url 'signup' %}" class='buttonLink'>Sign up</a></li>
+        <a class="navitem" href = "{% url 'login' %}" class='buttonLink'>Log in</a>
+        <a class="navitem" href = "{% url 'signup' %}" class='buttonLink'>Sign up</a>
     {% endif %}
+        <div class="navitem clickWheel dropWheel" id="dropdown-control"><span class="material-icons-outlined" id="dropdown-icon">search</span></div>
+        <div class="navitem" id="dropdown-content"></div>
     </ul>
+    </div>
     </div>
     <div id="middle">
     {% block content %}

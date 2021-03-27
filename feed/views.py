@@ -4,8 +4,11 @@ from django.http import HttpResponse
 from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 # Create your views here.
+
+SEARCH_RANGE = 60
 
 def index(request):
     if request.method == 'GET':
@@ -17,10 +20,16 @@ def index(request):
             postid = int(request.POST['pid'])
             if request.POST['action'] == 'shift':
                 hue = int(request.POST['hue'])
-                v = Vote.objects.get_or_create(author=request.user,post=Post(id=postid))[0]
-                v.hue = hue
-                v.save()
-                return HttpResponse(Post(id=postid).hue) # Updated colour
+                post = Post.objects.get(id=postid)
+                vlist = Vote.objects.filter(author=request.user,post=post)
+                if len(vlist) != 0:
+                    v = vlist[0]
+                    v.hue = hue
+                    v.save()
+                else:
+                    v = Vote(author=request.user, post=post, hue=hue)
+                    v.save()
+                return HttpResponse(Post.objects.get(id=postid).hue) # Updated colour
             elif request.POST['action'] == 'delete':
                 p = Post.objects.get(id=postid)
                 if p.author == request.user:
@@ -51,3 +60,18 @@ def artist(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     posts = Post.objects.filter(author=user).order_by('-id')
     return render(request, 'feed/artist.html', {'post_list':posts, 'artist':user })
+
+def search(request):
+    hue = int(request.GET.get("h",0))
+    lowerbound = hue - (SEARCH_RANGE / 2)
+    upperbound = hue + (SEARCH_RANGE / 2)
+    posts = Post.objects.none()
+    if lowerbound < 0:
+        posts = posts | Post.objects.filter(hue__range=(0,hue)) | Post.objects.filter(hue__gte=360+lowerbound)
+    else:
+        posts = posts | Post.objects.filter(hue__range=(lowerbound,hue))
+    if upperbound > 360:
+        posts = posts | Post.objects.filter(hue__range=(hue,360)) | Post.objects.filter(hue__lte=upperbound-360)
+    else:
+        posts = posts | Post.objects.filter(hue__range=(hue,upperbound))
+    return render(request,'feed/search.html', {'post_list':posts, 'search_hue':hue})

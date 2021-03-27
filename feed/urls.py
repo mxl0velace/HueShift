@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('makepiece', views.makepiece, name="makepiece"),
     path('artist/<str:username>',views.artist,name="artist"),
+    path('search',views.search,name="search"),
 ]

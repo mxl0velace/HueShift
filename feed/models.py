@@ -12,13 +12,17 @@ class Post(models.Model):
         on_delete=models.CASCADE
     )
     date_posted = models.DateTimeField(auto_now_add=True)
+    hue = models.IntegerField(
+        validators=[MinValueValidator(1),MaxValueValidator(360)],
+        default=1
+    )
 
     @property
     def post_id(self):
         return self.id
 
-    @property
-    def hue(self):
+    
+    def updateHue(self):
         if self.vote_set.count() == 0:
             return 0
         x = 0
@@ -31,11 +35,14 @@ class Post(models.Model):
         x /= count
         y /= count
 
-        hue = atan2(y, x)
-        if hue < -1:
-            hue += 2 * pi
-        hue = degrees(hue)
-        return hue
+        nhue = atan2(y, x)
+        if nhue < -1:
+            nhue += 2 * pi
+        nhue = degrees(nhue)
+        if nhue <= 0:
+            nhue = nhue + 360
+        self.hue = nhue
+        self.save()
 
     def __str__(self):
         return self.author.username + ":" + self.body_text
@@ -56,3 +63,7 @@ class Vote(models.Model):
 
     def __str__(self):
         return str(self.post.id) + " " + self.author.username + " " + str(self.hue)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.post.updateHue()

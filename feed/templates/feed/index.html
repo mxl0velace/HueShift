@@ -13,6 +13,7 @@
         <div class="post_header">
             <div class="post_author"><a href = '{% url 'artist' post.author.username %}' >{{ post.author.username }}</a></div>
             <div class="post_date">{{ post.date_posted|date:"j/n/y H:i"}}</div>
+            <div class="post_count">{{ post.vote_set.count }} shift{{ post.vote_set.count|pluralize }}</div>
             <div class="post_buttons">
                 {% if post.author == user%}
                     <span class="material-icons-outlined" onClick="deletePost(this)">delete</span>

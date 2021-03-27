@@ -63,14 +63,10 @@ body{
     min-height: 20px;
 }
 
-.post_author{
+.post_author, .post_date, .post_count{
     float: left;
     margin-right: 10px;
     min-width: 100px;
-}
-
-.post_date{
-    float: left;
 }
 
 .post_buttons{

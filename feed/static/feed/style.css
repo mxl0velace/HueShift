@@ -6,6 +6,9 @@
     background-color: #f4f4f2;
     overflow: hidden;
     border: 2px solid #495464;
+    transition: transform 1.5s, opacity 1.25s;
+    transform: translateX(0);
+    opacity: 1;
 }
 
 #middle{
@@ -96,6 +99,11 @@ body{
     min-height: 40px;
     padding: 10px;
     border-top: 2px solid #495464;
+}
+
+.post_deleted{
+    transform: translateX(100vw);
+    opacity:0;
 }
 
 *{

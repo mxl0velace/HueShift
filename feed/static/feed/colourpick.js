@@ -44,9 +44,12 @@ function deletePost(button){
             var picker = document.getElementById('picker');
             if(picker.closest('.post') == post){
                 picker.style.display = "none";
-                document.appendChild(picker);
+                document.body.appendChild(picker);
             }
-            post.remove();
+            post.classList.add('post_deleted');
+            post.addEventListener('transitionend', function(){
+                post.remove();
+            })
         }
     }
 

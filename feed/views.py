@@ -78,7 +78,7 @@ def search(request):
         posts = posts | Post.objects.filter(hue__range=(hue,360)) | Post.objects.filter(hue__lte=upperbound-360)
     else:
         posts = posts | Post.objects.filter(hue__range=(hue,upperbound))
-    return render(request,'feed/search.html', {'post_list':posts[(pagenum-1)*PER_PAGE:pagenum*PER_PAGE], 'search_hue':hue, 'pagenum':pagenum})
+    return render(request,'feed/search.html', {'post_list':posts.order_by('-id')[(pagenum-1)*PER_PAGE:pagenum*PER_PAGE], 'search_hue':hue, 'pagenum':pagenum})
 
 def handlePagenum(request):
     pageN = request.GET.get('page',1)
